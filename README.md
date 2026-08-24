@@ -701,21 +701,22 @@ latexmk -v
 为了方便检查和升级软件，将常用维护脚本统一放在：
 
 ```text
-~/.config/sh/
+~/dotfiles_wsl/sh/
 ```
 
 当前脚本：
 
 ```text
-~/.config/sh/check-nvim.sh
-~/.config/sh/update-nvim.sh
-~/.config/sh/update-yazi.sh
+~/dotfiles_wsl/sh/check-nvim.sh
+~/dotfiles_wsl/sh/check-yazi.sh
+~/dotfiles_wsl/sh/update-nvim.sh
+~/dotfiles_wsl/sh/update-yazi.sh
 ```
 
 ## 14.1 创建脚本目录
 
 ```bash
-mkdir -p ~/.config/sh
+mkdir -p ~/dotfiles_wsl/sh
 ```
 
 将 `.sh` 文件放入该目录。
@@ -725,7 +726,7 @@ mkdir -p ~/.config/sh
 第一次添加脚本后，需要给脚本添加可执行权限：
 
 ```bash
-chmod +x ~/.config/sh/*.sh
+chmod +x ~/dotfiles_wsl/sh/*.sh
 ```
 
 `chmod +x` 通常只需要执行一次。
@@ -733,7 +734,7 @@ chmod +x ~/.config/sh/*.sh
 检查权限：
 
 ```bash
-ls -l ~/.config/sh/
+ls -l ~/dotfiles_wsl/sh/
 ```
 
 如果看到类似：
@@ -750,7 +751,7 @@ ls -l ~/.config/sh/
 
 ```bash
 # Shell scripts
-export PATH="$HOME/.config/sh:$PATH"
+export PATH="$HOME/dotfiles_wsl/sh:$PATH"
 ```
 
 重新加载：
@@ -762,7 +763,7 @@ source ~/.bashrc
 检查：
 
 ```bash
-echo "$PATH" | tr ':' '\n' | grep "$HOME/.config/sh"
+echo "$PATH" | tr ':' '\n' | grep "$HOME/dotfiles_wsl/sh"
 ```
 
 加入 PATH 后，可以在任意目录直接输入脚本名执行，不需要输入完整路径。

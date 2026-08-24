@@ -6,7 +6,7 @@
 ---
 # 1. 配置文件与软连接
 
-配置文件在'~/dotfiles_wsl'和'~/dotfiles_wsl/.config'文件夹中。
+配置文件在 `~/dotfiles_wsl` 和 `~/dotfiles_wsl/.config` 文件夹中。
 
 软连接如下：  
 

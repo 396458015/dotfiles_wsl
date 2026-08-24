@@ -138,7 +138,7 @@ fi
 # ============================================================
 # Custom shell scripts
 # ============================================================
-export PATH="$HOME/dotfiles_wsl/.config/sh:$PATH"
+export PATH="$HOME/dotfiles_wsl/sh:$PATH"
 
 # ============================================================
 # Cargo / Rust

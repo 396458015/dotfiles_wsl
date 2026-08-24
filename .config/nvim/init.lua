@@ -2356,7 +2356,8 @@ require("lazy").setup({
   lazy = true,
   event = "InsertEnter",
   opts = {
-      path = vim.fn.has("unix") == 1 and "/mnt/c/Users/ThinkPad/AppData/Local/nvim-data/Maxl/im-select.exe" or nil,
+      -- wsl2需要调用windows下的im-select.exe，插件才能正常运行。
+      path = vim.fn.has("unix") == 1 and "/mnt/d/Dotfiles/nvim/nvim/support/im-select.exe" or nil,
       enabled = false,   -- Start enabled (default: true)
       mapping = "<F2>", -- Optional toggle mapping
 

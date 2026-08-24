@@ -4,8 +4,49 @@
 > 主要用于记录常用软件的安装、配置和升级命令，方便以后直接复制使用。
 
 ---
+# 1. 配置文件与软连接
 
-# 1. WSL2
+配置文件在'~/dotfiles_wsl'和'~/dotfiles_wsl/.config'文件夹中。
+
+软连接如下：  
+
+# 1.1 根目录
+- bashrc
+```bash
+ln -s ~/dotfiles_wsl/.bashrc ~/.bashrc
+```
+- tmux
+```bash
+ln -s ~/dotfiles_wsl/.tmux.conf ~/.tmux.conf
+```
+- vimrc
+```bash
+ln -s ~/dotfiles_wsl/.vimrc ~/.vimrc
+```
+
+# 1.2 .config目录
+- nvim
+```bash
+ln -s ~/dotfiles_wsl/.config/nvim/init.lua ~/.config/nvim/init.lua
+ln -s ~/dotfiles_wsl/.config/nvim/lua ~/.config/nvim/lua
+ln -s ~/dotfiles_wsl/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock.json
+```
+- yazi
+```bash
+ln -s ~/dotfiles_wsl/.config/yazi ~/.config/yazi
+```
+- lazygit
+```bash
+ln -s ~/dotfiles_wsl/.config/lazygit ~/.config/lazygit
+```
+- starship
+```bash
+ln -s ~/dotfiles_wsl/.config/starship.toml ~/.config/starship.toml
+```
+
+---
+
+# 2. WSL2
 
 以下命令在 Windows PowerShell 中运行。
 
@@ -35,7 +76,7 @@ wsl --shutdown
 
 ---
 
-# 2. Git
+# 3. Git
 
 安装：
 
@@ -59,7 +100,7 @@ sudo apt install --only-upgrade git
 
 ---
 
-# 3. Neovim
+# 4. Neovim
 
 配置文件：
 
@@ -73,7 +114,7 @@ sudo apt install --only-upgrade git
 ~/.config/nvim-withoutPlugin-0.7.2/
 ```
 
-## 3.1 安装最新版 Neovim
+## 4.1 安装最新版 Neovim
 
 如果以前通过 apt 安装过 Neovim：
 
@@ -126,7 +167,7 @@ update-nvim.sh
 
 ---
 
-## 3.2 Neovim 基础编译依赖
+## 4.2 Neovim 基础编译依赖
 
 部分插件需要本地编译环境：
 
@@ -147,7 +188,7 @@ sudo apt install libclang-dev -y
 
 ---
 
-## 3.3 Neovim 与 Windows 剪贴板
+## 4.3 Neovim 与 Windows 剪贴板
 
 安装 `win32yank`：
 
@@ -188,7 +229,7 @@ which win32yank.exe
 
 ---
 
-## 3.4 LeaderF 等插件依赖
+## 4.4 LeaderF 等插件依赖
 
 LeaderF 及部分搜索、跳转插件需要 Python 开发环境、ripgrep 和 ctags：
 
@@ -202,7 +243,7 @@ sudo apt install universal-ctags -y
 
 ---
 
-## 3.5 Neovim Python provider
+## 4.5 Neovim Python provider
 
 部分 Neovim Python 插件需要 Python provider：
 
@@ -220,7 +261,7 @@ sudo apt install python3-pynvim -y
 
 ---
 
-## 3.6 Tree-sitter CLI
+## 4.6 Tree-sitter CLI
 
 部分 Neovim Tree-sitter 功能或插件需要 `tree-sitter-cli`。
 
@@ -247,13 +288,13 @@ cargo install tree-sitter-cli --force
 
 ---
 
-## 3.7 Mason / LSP 的 Node.js 与 npm 依赖
+## 4.7 Mason / LSP 的 Node.js 与 npm 依赖
 
 Mason 安装部分基于 Node.js 的 LSP，例如 `pyright`，需要 Node.js 和 npm。
 
 推荐使用 `nvm` 安装和管理 Node.js。
 
-### 3.7.1 安装 nvm
+### 4.7.1 安装 nvm
 
 如需安装更新版本，请先查看 nvm 最新 Release。
 
@@ -275,7 +316,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 ```
 
-### 3.7.2 安装 Node.js LTS
+### 4.7.2 安装 Node.js LTS
 
 ```bash
 nvm install --lts
@@ -293,7 +334,7 @@ npm -v
 which node
 ```
 
-### 3.7.3 升级 Node.js
+### 4.7.3 升级 Node.js
 
 ```bash
 nvm install --lts
@@ -305,7 +346,7 @@ nvm alias default 'lts/*'
 
 ---
 
-## 3.8 Neovim 插件检查
+## 4.8 Neovim 插件检查
 
 更新 Lazy 管理的插件：
 
@@ -327,9 +368,9 @@ LSP 管理：
 
 ---
 
-# 4. Rust / Cargo
+# 5. Rust / Cargo
 
-## 4.1 安装 Rust
+## 5.1 安装 Rust
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -356,7 +397,7 @@ rustc --version
 cargo --version
 ```
 
-## 4.2 升级 Rust
+## 5.2 升级 Rust
 
 ```bash
 rustup update
@@ -364,9 +405,9 @@ rustup update
 
 ---
 
-# 5. Typst
+# 6. Typst
 
-## 5.1 安装
+## 6.1 安装
 
 ```bash
 cargo install --locked typst-cli
@@ -379,7 +420,7 @@ typst --version
 which typst
 ```
 
-## 5.2 升级
+## 6.2 升级
 
 ```bash
 cargo install --locked typst-cli --force
@@ -387,7 +428,7 @@ cargo install --locked typst-cli --force
 
 ---
 
-# 6. Python
+# 7. Python
 
 安装 pip：
 
@@ -430,7 +471,7 @@ pip3 --version
 
 ---
 
-# 7. Starship
+# 8. Starship
 
 配置文件：
 
@@ -438,7 +479,7 @@ pip3 --version
 ~/.config/starship.toml
 ```
 
-## 7.1 安装
+## 8.1 安装
 
 ```bash
 curl -sS https://starship.rs/install.sh | sh
@@ -462,7 +503,7 @@ source ~/.bashrc
 starship --version
 ```
 
-## 7.2 升级
+## 8.2 升级
 
 ```bash
 curl -sS https://starship.rs/install.sh | sh
@@ -470,7 +511,7 @@ curl -sS https://starship.rs/install.sh | sh
 
 ---
 
-# 8. Lazygit
+# 9. Lazygit
 
 配置文件：
 
@@ -478,7 +519,7 @@ curl -sS https://starship.rs/install.sh | sh
 ~/.config/lazygit/config.yml
 ```
 
-## 8.1 安装
+## 9.1 安装
 
 ```bash
 LAZYGIT_VERSION=$(curl -s https://api.github.com/repos/jesseduffield/lazygit/releases/latest | grep -Po '"tag_name": "v\K[^"]+')
@@ -509,13 +550,13 @@ lazygit --version
 which lazygit
 ```
 
-## 8.2 升级
+## 9.2 升级
 
 升级时重新执行安装的全部命令即可。
 
 ---
 
-# 9. Yazi
+# 10. Yazi
 
 配置目录：
 
@@ -523,7 +564,7 @@ which lazygit
 ~/.config/yazi/
 ```
 
-## 9.1 安装
+## 10.1 安装
 
 ```bash
 curl -fsSL https://yazi-rs.github.io/builds/yazi-keyring.gpg | sudo tee /usr/share/keyrings/yazi-keyring.gpg >/dev/null
@@ -557,7 +598,7 @@ bind -x '"\ef": y'
 ~/.bashrc
 ```
 
-## 9.2 升级
+## 10.2 升级
 
 ```bash
 sudo apt update
@@ -573,9 +614,9 @@ update-yazi.sh
 
 ---
 
-# 10. Fastfetch
+# 11. Fastfetch
 
-## 10.1 安装
+## 11.1 安装
 
 ```bash
 sudo add-apt-repository ppa:zhangsongcui3371/fastfetch
@@ -593,7 +634,7 @@ sudo apt install fastfetch -y
 fastfetch --version
 ```
 
-## 10.2 升级
+## 11.2 升级
 
 ```bash
 sudo apt update
@@ -603,7 +644,7 @@ sudo apt install --only-upgrade fastfetch
 
 ---
 
-# 11. tmux
+# 12. tmux
 
 配置文件：
 
@@ -611,7 +652,7 @@ sudo apt install --only-upgrade fastfetch
 ~/.tmux.conf
 ```
 
-## 11.1 安装
+## 12.1 安装
 
 ```bash
 sudo apt update
@@ -625,7 +666,7 @@ sudo apt install tmux -y
 tmux -V
 ```
 
-## 11.2 升级
+## 12.2 升级
 
 ```bash
 sudo apt update
@@ -635,7 +676,7 @@ sudo apt install --only-upgrade tmux
 
 ---
 
-# 12. TeX Live
+# 13. TeX Live
 
 当前使用：
 
@@ -655,7 +696,7 @@ latexmk -v
 
 ---
 
-# 13. Shell 脚本
+# 14. Shell 脚本
 
 为了方便检查和升级软件，将常用维护脚本统一放在：
 
@@ -671,7 +712,7 @@ latexmk -v
 ~/.config/sh/update-yazi.sh
 ```
 
-## 13.1 创建脚本目录
+## 14.1 创建脚本目录
 
 ```bash
 mkdir -p ~/.config/sh
@@ -679,7 +720,7 @@ mkdir -p ~/.config/sh
 
 将 `.sh` 文件放入该目录。
 
-## 13.2 添加执行权限
+## 14.2 添加执行权限
 
 第一次添加脚本后，需要给脚本添加可执行权限：
 
@@ -703,7 +744,7 @@ ls -l ~/.config/sh/
 
 说明脚本已经具有执行权限。
 
-## 13.3 将脚本目录加入 PATH
+## 14.3 将脚本目录加入 PATH
 
 在 `~/.bashrc` 中加入：
 
@@ -726,7 +767,7 @@ echo "$PATH" | tr ':' '\n' | grep "$HOME/.config/sh"
 
 加入 PATH 后，可以在任意目录直接输入脚本名执行，不需要输入完整路径。
 
-## 13.4 Neovim 版本检查脚本
+## 14.4 Neovim 版本检查脚本
 
 脚本：
 
@@ -745,7 +786,7 @@ check-nvim.sh
 - 当前安装的 Neovim 版本
 - GitHub 上最新的 Neovim Release 版本
 
-## 13.5 Neovim 升级脚本
+## 14.5 Neovim 升级脚本
 
 脚本：
 
@@ -768,7 +809,7 @@ update-nvim.sh
 5. 删除临时下载文件。
 6. 显示升级后的 Neovim 版本。
 
-## 13.6 Yazi 升级脚本
+## 14.6 Yazi 升级脚本
 
 脚本：
 
@@ -792,7 +833,7 @@ sudo apt install --only-upgrade yazi -y
 
 最后显示当前 Yazi 版本。
 
-## 13.7 脚本基本格式
+## 14.7 脚本基本格式
 
 Bash 脚本通常以：
 
@@ -823,7 +864,7 @@ sudo apt install --only-upgrade yazi -y
 
 ---
 
-# 14. 常用配置文件
+# 15. 常用配置文件
 
 ```text
 ~/.bashrc
@@ -843,7 +884,7 @@ sudo apt install --only-upgrade yazi -y
 
 ---
 
-# 15. 常用升级命令
+# 16. 常用升级命令
 
 Ubuntu 软件：
 

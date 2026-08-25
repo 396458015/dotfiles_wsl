@@ -92,6 +92,9 @@ alias ....='cd ../../..'
 alias h='cd ~'
 alias root='cd /'
 
+# 用 Windows 文件资源管理器打开当前目录
+alias o='explorer.exe .'
+
 # Bash
 alias ba='nvim ~/.bashrc'
 alias rl='source ~/.bashrc'

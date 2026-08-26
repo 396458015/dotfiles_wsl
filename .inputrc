@@ -1,0 +1,50 @@
+# ============================================================
+# bash-completion
+# GNU Readline 
+# ============================================================
+
+# 加载系统默认配置
+$include /etc/inputrc
+
+# 补全时忽略大小写
+set completion-ignore-case on
+
+# 有多个候选时，一次 Tab 就显示候选
+set show-all-if-ambiguous on
+
+# 当前文本无法继续补全时，也直接显示候选
+set show-all-if-unmodified on
+
+# 显示补全文件的类型标记
+#  /    目录
+#  *    可执行文件
+#  @    符号链接
+#  =    socket
+#  |    FIFO
+set visible-stats on
+
+# 根据 LS_COLORS 给补全结果着色
+set colored-stats on
+
+# 补全列表中的公共前缀使用颜色突出显示
+set colored-completion-prefix on
+
+# 软连接指向目录时，在补全结果后添加 /
+set mark-symlinked-directories on
+
+# 补全结果按横向顺序排列
+set print-completions-horizontally on
+
+# 在单词中间补全时，避免重复插入已有文本
+set skip-completed-text on
+
+# 根据已输入的前缀使用 ↑↓ 搜索历史
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+
+
+
+
+
+

@@ -23,6 +23,10 @@ ln -s ~/dotfiles_wsl/.tmux.conf ~/.tmux.conf
 ```bash
 ln -s ~/dotfiles_wsl/.vimrc ~/.vimrc
 ```
+- bash-completion
+```bash
+ln -s ~/dotfiles_wsl/.inputrc ~/.inputrc
+```
 
 # 1.2 .config目录
 - nvim

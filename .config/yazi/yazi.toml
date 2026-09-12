@@ -32,6 +32,7 @@ nvim = [
 ]
 open = [
     { run = 'start "" %s1',    desc = "Open", for = "windows", orphan = true },
+    { run = 'cmd.exe /c start "" "$(wslpath -w %s1)"', desc = "Open", for = "unix", orphan = true },
 ]
 extract = [
     { run = 'ouch d -y %*', desc = "Extract here with ouch", for = "windows" },

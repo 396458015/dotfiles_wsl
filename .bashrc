@@ -180,6 +180,76 @@ export ALL_PROXY="$all_proxy"
 export MPLCONFIGDIR="$HOME/.cache/matplotlib"
 
 # ============================================================
+# fzf
+# ============================================================
+
+# Catppuccin Frappe
+export FZF_DEFAULT_OPTS="
+    --height=100%
+    --preview-window=right:55%
+    --header='      '
+    --prompt=' '
+    --marker='󰸞'
+    --pointer='▶'
+    --info=inline:'󰶺  '
+    --no-separator
+    --scrollbar='▐'
+    --ansi
+    --cycle
+    --border=rounded
+    --border-label='󰞘  󰞗'
+    --margin=0,0
+    --preview='batcat --theme=\"Visual Studio Dark+\" --color=always --style=numbers --line-range=:500 -- {}'
+    --color=fg:#949cbb
+    --color=bg+:#414559
+    --color=gutter:#3a3f5a
+    --color=pointer:#ca9ee6
+    --color=info:#ca9ee6
+    --color=hl:#e78284
+    --color=hl+:#e78284
+    --color=label:#80a0ff
+    --color=marker:#f2d5cf
+    --color=spinner:#f2d5cf
+    --color=header:#e78284
+    --color=fg+:#c6d0f5
+    --color=prompt:#ca9ee6
+    --color=border:#626880
+    --bind=ctrl-p:toggle-preview
+    --bind=ctrl-j:down
+    --bind=ctrl-k:up
+    --bind=ctrl-s:toggle-sort
+    --bind=ctrl-f:preview-half-page-down
+    --bind=ctrl-b:preview-half-page-up
+    --bind=ctrl-a:select-all
+"
+
+# Alt+X：fzf 选择文件，用 Neovim 打开
+fzf_nvim() {
+    local file
+    file="$(fzf)" || return
+
+    [[ -n "$file" ]] && nvim -- "$file"
+}
+
+bind -x '"\ex":fzf_nvim'
+
+# Alt+Z：fzf 选择文件，并进入文件所在目录
+fzf_cd() {
+    local path
+    path="$(fzf)" || return
+
+    [[ -z "$path" ]] && return
+
+    if [[ -d "$path" ]]; then
+        cd -- "$path"
+    else
+        cd -- "$(dirname -- "$path")"
+    fi
+}
+
+bind '"\ez":"fzf_cd\n"'
+
+# ============================================================
 # Yazi
 # ============================================================
 function y() {

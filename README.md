@@ -616,6 +616,169 @@ sudo apt install --only-upgrade yazi
 update-yazi.sh
 ```
 
+## 10.3 安装最新版 fzf
+
+Yazi 的 `fzf` 插件需要较新的 `fzf`。Ubuntu 22.04 官方软件仓库提供的 `fzf` 版本较旧，因此建议保留系统版本，同时将最新版 `fzf` 安装到：
+
+```text
+~/.local/bin/fzf
+```
+
+这样无需保留源码仓库，也不会修改系统安装的：
+
+```text
+/usr/bin/fzf
+```
+
+先确认 `~/.local/bin` 已经在 `PATH` 中：
+
+```bash
+echo "$PATH" | tr ':' '
+' | grep -Fx "$HOME/.local/bin"
+```
+
+如果能够看到类似：
+
+```text
+/home/thinkpad/.local/bin
+```
+
+说明无需修改 `~/.bashrc`。
+
+确认 CPU 架构：
+
+```bash
+uname -m
+```
+
+如果输出：
+
+```text
+x86_64
+```
+
+则使用 `linux_amd64` 版本。Intel 和 AMD 的 64 位 x86 CPU 都使用该版本。
+
+下载安装最新版 `fzf`：
+
+```bash
+cd /tmp
+
+LATEST=$(
+    curl -fsSLI \
+        -o /dev/null \
+        -w '%{url_effective}' \
+        https://github.com/junegunn/fzf/releases/latest
+)
+
+VERSION="${LATEST##*/}"
+VERSION="${VERSION#v}"
+
+echo "Latest fzf version: $VERSION"
+
+curl -fLO \
+    "https://github.com/junegunn/fzf/releases/download/v${VERSION}/fzf-${VERSION}-linux_amd64.tar.gz"
+
+tar -xzf "fzf-${VERSION}-linux_amd64.tar.gz"
+
+./fzf --version
+
+install -m 0755 fzf ~/.local/bin/fzf
+
+rm -f fzf "fzf-${VERSION}-linux_amd64.tar.gz"
+
+hash -r
+```
+
+安装后检查：
+
+```bash
+which fzf
+fzf --version
+type -a fzf
+```
+
+正常情况下，应优先显示：
+
+```text
+/home/thinkpad/.local/bin/fzf
+```
+
+并且 `type -a fzf` 类似：
+
+```text
+fzf is /home/thinkpad/.local/bin/fzf
+fzf is /usr/bin/fzf
+fzf is /bin/fzf
+```
+
+其中：
+
+```text
+~/.local/bin/fzf
+```
+
+为手动安装的新版，Yazi 实际使用该版本。
+
+如果此前通过 APT 安装过 `fzf`，系统版本通常位于：
+
+```text
+/usr/bin/fzf
+```
+
+由于 Ubuntu 中 `/bin` 通常链接到 `/usr/bin`，`type -a fzf` 还可能同时显示：
+
+```text
+/bin/fzf
+```
+
+`/usr/bin/fzf` 和 `/bin/fzf` 通常实际指向同一个系统版 `fzf`，可以保留，无需删除。
+
+Yazi 中的 `fzf` 快捷键：
+
+```toml
+{ on = "z", run = "plugin fzf", desc = "Jump to a directory, or reveal a file using fzf" },
+```
+
+安装新版 `fzf` 后，需要完全退出当前 Yazi，再重新启动 Yazi，然后按 `z` 测试。
+
+### 10.3.1 安装 bat
+
+`fzf` 的右侧文件预览使用 `bat`。在 Ubuntu 22.04 / WSL2 中，安装包名称为 `bat`，但实际命令通常为 `batcat`。
+
+安装：
+
+```bash
+sudo apt update
+sudo apt install bat -y
+```
+
+检查：
+
+```bash
+command -v batcat
+batcat --version
+```
+
+正常情况下会看到类似：
+
+```text
+/usr/bin/batcat
+```
+
+如果 `fzf` 配置中直接使用 `batcat`，则无需额外建立 `bat` 软连接。例如在 `~/.bashrc` 中：
+
+```bash
+--preview='batcat --theme=\"Visual Studio Dark+\" --color=always --style=numbers --line-range=:500 -- {}'
+```
+
+检查 `batcat` 是否包含 `Visual Studio Dark+` 主题：
+
+```bash
+batcat --list-themes | grep -F "Visual Studio Dark+"
+```
+
+如果有输出，则该主题可以直接用于 `fzf` 预览。
 ---
 
 # 11. Fastfetch

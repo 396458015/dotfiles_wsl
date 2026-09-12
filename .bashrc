@@ -223,7 +223,7 @@ export FZF_DEFAULT_OPTS="
     --bind=ctrl-a:select-all
 "
 
-# Alt+X：fzf 选择文件，用 Neovim 打开
+# Alt+V：fzf 选择文件，用 Neovim 打开
 fzf_nvim() {
     local file
     file="$(fzf)" || return
@@ -231,9 +231,9 @@ fzf_nvim() {
     [[ -n "$file" ]] && nvim -- "$file"
 }
 
-bind -x '"\ex":fzf_nvim'
+bind -x '"\ev":fzf_nvim'
 
-# Alt+Z：fzf 选择文件，并进入文件所在目录
+# Alt+C：fzf 选择文件，并进入文件所在目录
 fzf_cd() {
     local path
     path="$(fzf)" || return
@@ -247,7 +247,7 @@ fzf_cd() {
     fi
 }
 
-bind '"\ez":"fzf_cd\n"'
+bind '"\ec":"fzf_cd\n"'
 
 # ============================================================
 # Yazi

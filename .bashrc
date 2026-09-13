@@ -2,10 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# ============================================================
-# Bash 基础设置
-# ============================================================
-
+# {{{ Bash 基础设置
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -23,11 +20,9 @@ shopt -s checkwinsize
 
 # Lesspipe
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# }}}
 
-# ============================================================
-# Debian / Ubuntu 默认 Prompt 设置
-# ============================================================
-
+# {{{ Debian / Ubuntu 默认 Prompt 设置
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
@@ -59,11 +54,9 @@ case "$TERM" in
         PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
         ;;
 esac
+# }}}
 
-# ============================================================
-# 颜色支持
-# ============================================================
-
+# {{{ 颜色支持
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors \
         && eval "$(dircolors -b ~/.dircolors)" \
@@ -74,11 +67,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
+# }}}
 
-# ============================================================
-# Alias
-# ============================================================
-
+# {{{ Alias
 # ls
 alias ll='ls -alF'
 alias la='ls -A'
@@ -96,7 +87,7 @@ alias root='cd /'
 alias o='explorer.exe .'
 
 # Bash
-alias ba='nvim ~/.bashrc'
+alias ba='nvim ~/dotfiles_wsl/.bashrc'
 alias rl='source ~/.bashrc'
 
 # Neovim
@@ -124,11 +115,9 @@ alias alert='notify-send --urgency=low \
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+# }}}
 
-# ============================================================
-# Bash Completion
-# ============================================================
-
+# {{{ Bash Completion
 if ! shopt -oq posix; then
     if [ -f /usr/share/bash-completion/bash_completion ]; then
         . /usr/share/bash-completion/bash_completion
@@ -136,34 +125,26 @@ if ! shopt -oq posix; then
         . /etc/bash_completion
     fi
 fi
+# }}}
 
-
-# ============================================================
-# Custom shell scripts
-# ============================================================
+# {{{ Custom shell scripts
 export PATH="$HOME/dotfiles_wsl/sh:$PATH"
+# }}}
 
-# ============================================================
-# Cargo / Rust
-# ============================================================
-
+# {{{ Cargo / Rust
 . "$HOME/.cargo/env"
 export PATH="$HOME/.cargo/bin:$PATH"
+# }}}
 
-# ============================================================
-# NVM / Node.js
+# {{{ NVM / Node.js
 # 用于管理和切换不同版本的 Node.js，并启用 Bash 命令自动补全
-# ============================================================
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# }}}
 
-# ============================================================
-# WSL2 Clash 代理
+# {{{ WSL2 Clash 代理
 # 动态获取 Windows 主机 IP
-# ============================================================
-
 export WSL_HOST=$(awk '/nameserver/ {print $2; exit}' /etc/resolv.conf)
 export http_proxy="http://${WSL_HOST}:7890"
 export https_proxy="http://${WSL_HOST}:7890"
@@ -171,18 +152,14 @@ export all_proxy="http://${WSL_HOST}:7890"
 export HTTP_PROXY="$http_proxy"
 export HTTPS_PROXY="$https_proxy"
 export ALL_PROXY="$all_proxy"
+# }}}
 
-# ============================================================
+# {{{ Matplotlib
 # Matplotlib
-# 避免在 ~/.config 下创建 matplotlib 目录
-# ============================================================
-
 export MPLCONFIGDIR="$HOME/.cache/matplotlib"
+# }}}
 
-# ============================================================
-# fzf
-# ============================================================
-
+# {{{ fzf
 # Catppuccin Frappe
 export FZF_DEFAULT_OPTS="
     --height=100%
@@ -248,10 +225,9 @@ fzf_cd() {
 }
 
 bind '"\ec":"fzf_cd\n"'
+# }}}
 
-# ============================================================
-# Yazi
-# ============================================================
+# {{{ Yazi
 function y() {
     local tmp cwd
     tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
@@ -267,11 +243,15 @@ function y() {
 
 # Alt+F 打开 Yazi
 bind '"\ef":"y\n"'
+# }}}
 
-# ============================================================
-# Starship
-# ============================================================
-
+# {{{ starship
 eval "$(starship init bash)"
+# }}}
+
+
+
+
+
 
 
